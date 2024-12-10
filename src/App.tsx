@@ -1,11 +1,15 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {
+  createBrowserRouter,
+  RouterProvider,
+  RouteObject,
+} from "react-router-dom";
 import AdminLayout from "./layouts/AdminLayout";
 import CustomerLayout from "./layouts/CustomerLayout";
 import Home from "./pages/Home";
 // import About from "./pages/About";
-import AdminDashboard from "./pages/AdminLandingPage";
+import AdminDashboard from "./pages/AdminDashboard";
 
-const router = createBrowserRouter([
+const routes: RouteObject[] = [
   {
     element: <CustomerLayout />,
     children: [
@@ -22,11 +26,17 @@ const router = createBrowserRouter([
         path: "/admin",
         element: <AdminDashboard />,
       },
+      // {
+      //   path: "/admin2",
+      //   element: <AdminLandingPage />,
+      // },
     ],
   },
-]);
+];
 
-const App = () => {
+const router = createBrowserRouter(routes);
+
+const App: React.FC = () => {
   return <RouterProvider router={router} />;
 };
 

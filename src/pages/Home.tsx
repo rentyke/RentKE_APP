@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, FormEvent, ChangeEvent } from "react";
 import {
   ChevronRight,
   Send,
@@ -7,11 +7,12 @@ import {
   Users,
   PenToolIcon as Tools,
 } from "lucide-react";
+import { Link } from "react-router-dom";
 
-export default function LandingPage() {
-  const [email, setEmail] = useState("");
+export default function LandingPage(): JSX.Element {
+  const [email, setEmail] = useState<string>("");
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: FormEvent<HTMLFormElement>): void => {
     e.preventDefault();
     // Handle form submission
     console.log("Form submitted with email:", email);
@@ -48,15 +49,23 @@ export default function LandingPage() {
               type="email"
               placeholder="Enter your email"
               value={email}
-              onChange={(e) => setEmail(e.target.value)}
+              onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                setEmail(e.target.value)
+              }
               className="w-full p-2 mb-4 border-b-2 border-[#204647] text-gray-800 placeholder-gray-500 focus:outline-none focus:border-[#E1C38E]"
             />
             <button
               type="submit"
-              className="w-full bg-[#E1C38E] text-[#204647] py-2 rounded hover:bg-[#E1C38E]/80 transition duration-300"
+              className="w-full bg-[#E1C38E] text-[#204647] py-2 mb-2 rounded hover:bg-[#E1C38E]/80 transition duration-300"
             >
               Register Now
             </button>
+            <div className="flex text-sm space-x-1">
+              <p className="">Already Registered?</p>
+              <Link to="/admin">
+                <p className="hover:underline">Login</p>
+              </Link>
+            </div>
           </form>
         </motion.div>
       </section>

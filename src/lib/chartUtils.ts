@@ -1,6 +1,17 @@
 // Tremor Raw chartColors [v0.1.0]
 
-const chartColors = {
+interface ColorConfig {
+  bg: string;
+  stroke: string;
+  fill: string;
+  text: string;
+}
+
+interface ChartColors {
+  [key: string]: ColorConfig;
+}
+
+const chartColors: ChartColors = {
   blue: {
     bg: "bg-blue-500",
     stroke: "stroke-blue-500",
@@ -57,18 +68,20 @@ const chartColors = {
   },
 };
 
-const AvailableChartColors = Object.keys(chartColors);
+const AvailableChartColors: string[] = Object.keys(chartColors);
 
-const constructCategoryColors = (categories, colors) => {
-  const categoryColors = new Map();
+const constructCategoryColors = (categories: string[], colors: string[]): Map<string, string> => {
+  const categoryColors = new Map<string, string>();
   categories.forEach((category, index) => {
     categoryColors.set(category, colors[index % colors.length]);
   });
   return categoryColors;
 };
 
-const getColorClassName = (color, type) => {
-  const fallbackColor = {
+type ColorType = keyof ColorConfig;
+
+const getColorClassName = (color: string, type: ColorType): string => {
+  const fallbackColor: ColorConfig = {
     bg: "bg-gray-500",
     stroke: "stroke-gray-500",
     fill: "fill-gray-500",
@@ -79,16 +92,22 @@ const getColorClassName = (color, type) => {
 
 // Tremor Raw getYAxisDomain [v0.0.0]
 
-const getYAxisDomain = (autoMinValue, minValue, maxValue) => {
-  const minDomain = autoMinValue ? "auto" : minValue ?? 0;
-  const maxDomain = maxValue ?? "auto";
+type DomainValue = number | "auto";
+
+const getYAxisDomain = (
+  autoMinValue: boolean,
+  minValue?: number,
+  maxValue?: number
+): [DomainValue, DomainValue] => {
+  const minDomain: DomainValue = autoMinValue ? "auto" : minValue ?? 0;
+  const maxDomain: DomainValue = maxValue ?? "auto";
   return [minDomain, maxDomain];
 };
 
 // Tremor Raw hasOnlyOneValueForKey [v0.1.0]
 
-function hasOnlyOneValueForKey(array, keyToCheck) {
-  const val = [];
+function hasOnlyOneValueForKey<T extends object>(array: T[], keyToCheck: keyof T): boolean {
+  const val: unknown[] = [];
 
   for (const obj of array) {
     if (Object.prototype.hasOwnProperty.call(obj, keyToCheck)) {
@@ -101,3 +120,16 @@ function hasOnlyOneValueForKey(array, keyToCheck) {
 
   return true;
 }
+
+export {
+  type ColorConfig,
+  type ChartColors,
+  type ColorType,
+  type DomainValue,
+  chartColors,
+  AvailableChartColors,
+  constructCategoryColors,
+  getColorClassName,
+  getYAxisDomain,
+  hasOnlyOneValueForKey,
+};

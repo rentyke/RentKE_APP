@@ -1,8 +1,7 @@
-// src/layouts/CustomerLayout.jsx
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-const CustomerLayout = () => {
+const CustomerLayout: React.FC = () => {
   return (
     <div>
       {/* <header>

@@ -1,12 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 
-const AdminLayout = () => {
+const AdminLayout: React.FC = () => {
   return (
     <div>
-      <header>
-        <h1>Admin Dashboard</h1>
-      </header>
+      <header></header>
       <main>
         <Outlet />
       </main>
