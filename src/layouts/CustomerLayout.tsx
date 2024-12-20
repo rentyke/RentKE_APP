@@ -10,9 +10,9 @@ const CustomerLayout: React.FC = () => {
       <main>
         <Outlet />
       </main>
-      {/* <footer>
+      <footer>
         <p>Customer Footer</p>
-      </footer> */}
+      </footer>
     </div>
   );
 };
