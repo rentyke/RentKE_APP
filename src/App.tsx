@@ -3,6 +3,7 @@ import {
   RouterProvider,
   RouteObject,
 } from "react-router-dom";
+import { Analytics } from "@vercel/analytics/react";
 import AdminLayout from "./layouts/AdminLayout";
 import CustomerLayout from "./layouts/CustomerLayout";
 import Home from "./pages/Home";
@@ -11,7 +12,12 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 const routes: RouteObject[] = [
   {
-    element: <CustomerLayout />,
+    element: (
+      <>
+        <CustomerLayout />
+        <Analytics />
+      </>
+    ),
     children: [
       {
         path: "/",
@@ -20,7 +26,12 @@ const routes: RouteObject[] = [
     ],
   },
   {
-    element: <AdminLayout />,
+    element: (
+      <>
+        <AdminLayout />
+        <Analytics />
+      </>
+    ),
     children: [
       {
         path: "/admin",
